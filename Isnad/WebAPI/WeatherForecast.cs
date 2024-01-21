@@ -1,4 +1,4 @@
-namespace IsnadCore
+namespace WebAPI
 {
     public class WeatherForecast
     {

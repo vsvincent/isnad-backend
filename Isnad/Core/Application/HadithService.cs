@@ -1,6 +1,6 @@
 ﻿namespace Application
 {
-    public class HadithService
+    public class HadithService : IHadithService
     {
 
     }

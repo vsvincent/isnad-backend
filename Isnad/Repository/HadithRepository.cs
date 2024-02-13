@@ -13,15 +13,22 @@ namespace Repository
 
         public async Task AddHadith(IHadith hadith)
         {
-            using (IAsyncSession session = _dbManager.GetSession())
+            try
             {
-                await session.ExecuteWriteAsync(
-            async tx =>
+                using (IAsyncSession session = _dbManager.GetSession())
+                {
+                    await session.ExecuteWriteAsync(async tx =>
+                    {
+                        await tx.RunAsync(
+                            "CREATE (h:Hadith {title: $title, text: $text, matn: $matn, sanad: $sanad})",
+                            new { title = hadith.Title, text = hadith.Text, matn =  hadith.Matn, sanad = hadith.Sanad });
+                    });
+                }
+            }
+            catch (ClientException ex)
             {
-                var result = await tx.RunAsync(
-                    "CREATE (h:Hadith {title: $title, text: $text, matn: $matn, sanad: $sanad})",
-                    new { hadith.Title, hadith.Text, hadith.Matn, hadith.Sanad });
-            });
+                Console.WriteLine($"Neo4j ClientException: {ex.Message}");
+                throw;
             }
         }
 

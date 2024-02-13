@@ -20,6 +20,6 @@ namespace Domain
         public string Text { get; set; }
         public string Matn { get; set; }
         public string Sanad { get; set; }
-        public IEnumerable<IHadithGrade> Grades { get; set; }
+        public IEnumerable<IHadithGrade>? Grades { get; set; }
     }
 }

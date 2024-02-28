@@ -8,6 +8,6 @@
         /// <summary>
         /// A list of transmissions in the chain with index indicating the order of transmission
         /// </summary>
-        IList<ITransmission> Transmissions { get; set; }
+        LinkedList<ITransmission> Transmissions { get; set; }
     }
 }
